@@ -1,6 +1,6 @@
 const mysql = require("mysql");
 const util = require("util");
-const config = require("./../config/default.json");
+const config = require("../config/default.json");
 
 const pool = mysql.createPool({
     host: config.database.host,

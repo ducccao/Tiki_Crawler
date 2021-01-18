@@ -12,5 +12,12 @@
             "products": "products",
             "users": "users"
         }
+    },
+    "tiki": {
+        "user": {
+            "usernameTag": "span",
+            "wrapClass": "review-comment__avatar",
+            "usernameClass": "review-comment__avatar-name"
+        }
     }
 }
