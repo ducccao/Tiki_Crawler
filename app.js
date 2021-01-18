@@ -1,6 +1,8 @@
 var Crawler = require("crawler");
 const cheerio = require("cheerio");
 const express = require("express");
+const db = require("./middlewares/ConnectDB");
+const config = require("./config/default.json");
 
 var c = new Crawler({
     maxConnections: 10,
@@ -63,3 +65,10 @@ function craw(url) {
         },
     }, ]);
 }
+
+async function test() {
+    const sql = `select * from ${config.database.table.users}`;
+    const users = await db.load(sql);
+    console.log(users);
+}
+test();
