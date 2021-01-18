@@ -31,7 +31,28 @@ c.queue([{
             // console.log(res.body);
             const html = res.body;
             const $ = cheerio.load(html);
-            console.log($("div").text());
+
+            const arraySrcIMG = [];
+            // for(let i=0;i<$("div").length;++i){
+            //     arrayDiv.push({
+            //         textContent:  $("div")[i].text
+            //     })
+            // }
+            let temp = $("img");
+
+            for (let i = 0; i < temp.length; ++i) {
+                //  console.log(temp[i].attribs.src);
+                arraySrcIMG.push({
+                    linkImg: temp[i].attribs.src,
+                });
+            }
+
+            console.log(arraySrcIMG);
+            //console.log(temp.map(e));
+
+            // console.log(temp);
+
+            //console.log(arrayDiv);
         }
         done();
     },
