@@ -1,0 +1,29 @@
+{
+  "name": "Tiki_Crawler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ducccao/Tiki_Crawler.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ducccao/Tiki_Crawler/issues"
+  },
+  "homepage": "https://github.com/ducccao/Tiki_Crawler#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.5",
+    "cors": "^2.8.5",
+    "crawler": "^1.3.0",
+    "express": "^4.17.1",
+    "get-urls": "^10.0.0",
+    "node-fetch": "^2.6.1",
+    "puppeteer": "^5.5.0"
+  }
+}
