@@ -18,8 +18,11 @@ var c = new Crawler({
 });
 
 // Queue URLs with custom callbacks & parameters
+
+const url = `https://tiki.vn/`;
+
 c.queue([{
-    uri: "https://tiki.vn/",
+    uri: url,
     jQuery: false,
 
     // The global callback won't be called
