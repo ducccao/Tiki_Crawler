@@ -39,14 +39,18 @@ function crawl(url) {
                 // console.log(res.body);
                 const html = res.body;
                 const tempHTML = `<h2 class="title">Hello world</h2>
-                <h2 class="title">Hello world2222</h2>
+                <h2 class="title2">Hello world2222</h2>
                 `;
+
+                console.log(html);
+
                 const $ = cheerio.load(html);
                 //  console.log($("h2").text());
 
+                console.log($("h2").attr("class"));
+
                 const h2 = $("h2").toArray();
 
-                // MY GOD I GOT THEM
                 for (let i = 0; i < h2.length; ++i) {
                     for (let j = 0; j < h2[i].children.length; ++j) {
                         console.log(h2[i].children[j].data);
@@ -65,19 +69,16 @@ function crawl(url) {
                 // console.log($(`.${usernameClass}`));
 
                 for (let i = 0; i < temp.length; ++i) {
-                    //  console.log(temp[i].attribs.src);
-                    //  console.log(temp[i].attribs);
-                    //   console.log(temp[i]);
-                    if (temp[i].attribs.class === usernameClass) {
-                        //  console.log(temp[i]);
+                    console.log(temp[i].attribs);
+
+                    for (let j = 0; j < temp[i].children.length; ++j) {
                         arrayUserName.push({
-                            //  userName:temp[i].attribs.text
+                            userName: temp[i].children[j].data,
                         });
                     }
-                    // arraySrcIMG.push({
-                    //     linkImg: temp[i].attribs.src,
-                    // });
                 }
+
+                //    console.log(arrayUserName);
 
                 // console.log(arraySrcIMG);
                 //console.log(temp.map(e));
