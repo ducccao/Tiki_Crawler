@@ -18,6 +18,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP DATABASE IF EXISTS titkicrawler;
 CREATE DATABASE titkicrawler CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 
+use titkicrawler;
+
 -- --------------------------
 -- Table structure for Users
 -- --------------------------

@@ -1,0 +1,15 @@
+{
+    "database": {
+        "host": "localhost",
+        "name": "titkicrawler",
+        "user": {
+            "username": "root",
+            "password": "root"
+        },
+        "table": {
+            "productdetails": "productdetails",
+            "products": "products",
+            "users": "users"
+        }
+    }
+}
