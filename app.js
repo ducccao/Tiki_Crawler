@@ -1,7 +1,7 @@
 const cheerio = require("cheerio");
 const config = require("./config/default.json");
 const query = require("./database/query");
-const rp = require("request-promise");
+const requestPromise = require("request-promise");
 const functions = require("./functionsCrawl/functions");
 
 // Queue URLs with custom callbacks & parameters
@@ -10,7 +10,6 @@ function crawl(url) {
     const options = {
         uri: url,
         transform: function(body) {
-            //Khi lấy dữ liệu từ trang thành công nó sẽ tự động parse DOM
             //  console.log(body.body);
             return cheerio.load(body);
         },
@@ -19,21 +18,18 @@ function crawl(url) {
     (async function crawler() {
         try {
             // Lấy dữ liệu từ trang crawl đã được parseDOM
-            var $ = await rp(options);
+            var $ = await requestPromise(options);
         } catch (error) {
             return error;
         }
 
-        //console.log($.html());
-
-        const avatarWrap = config.tiki.user.wrapClass;
-
-        // Crawl full des
-        const fullDesWrap = config.tiki.fullDes.tableWrapClass;
-        const fullDesContent = $(`${fullDesWrap} td`).text().trim();
+        // Crawl product
+        const productStatus = await functions.CrawlProduct($);
         // Crawl product Details
-        functions.CrawlProductDetail($);
-        // Crawl
+        //  const proDetailStatus = await functions.CrawlProductDetail($);
+
+        console.log(proDetailStatus);
+        //   console.log(productStatus);
     })();
 }
 
@@ -41,8 +37,11 @@ function crawl(url) {
 //-- Common Input
 //-------------------------
 
+// URL - proDetails
 const url = `https://tiki.vn/combo-2-lan-khu-mui-nuoc-hoa-enchanteur-charming-50ml-chai-p58673652.html`;
-const url2 = `https://tiki.vn/combo-2-lan-khu-mui-nuoc-hoa-enchanteur-charming-50ml-chai-p58673652/nhan-xet/5180704`;
+// URL - Products
+const url2 = `https://tiki.vn/lam-dep-suc-khoe/c1520`;
+// URL - User
 const url3 = `https://freetuts.net/reactjs/tu-hoc-reactjs`;
 
 //-------------------------
@@ -50,7 +49,7 @@ const url3 = `https://freetuts.net/reactjs/tu-hoc-reactjs`;
 //-- Input: URL
 //-- Output: Records In Database
 //-------------------------
-crawl(url);
+crawl(url2);
 
 //-------------------------
 //-- Watch Records Database

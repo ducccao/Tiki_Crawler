@@ -22,6 +22,9 @@
         "productDetails": {
             "tableWrapClass": ".has-table"
         },
+        "products": {
+            "proName": ".name span"
+        },
         "fullDes": {
             "tableWrapClass": ".has-table"
 

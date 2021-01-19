@@ -29,7 +29,7 @@ CREATE TABLE `Users`(
 `userName` nvarchar(50) COLLATE utf8_unicode_ci NOT NULL,
 `commentID` int unsigned NOT NULL ,
 PRIMARY KEY (`userID`)
-) ENGINE=MyISAM auto_increment=10000 default  charset=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM auto_increment=4 default  charset=utf8 COLLATE=utf8_unicode_ci;
 -- --------------------------
 -- Records of Users
 -- --------------------------
@@ -50,18 +50,41 @@ CREATE TABLE `Products`(
 `proID` int unsigned NOT NULL AUTO_INCREMENT,
 `proName` nvarchar(50) COLLATE utf8_unicode_ci NOT NULL,
 `price` int unsigned NOT NULL ,
-`fullDes` text COLLATE utf8_unicode_ci NOT NULL ,
 PRIMARY KEY (`proID`)
-) ENGINE=MyISAM auto_increment=10000 default  charset=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM auto_increment=4 default  charset=utf8 COLLATE=utf8_unicode_ci;
 -- --------------------------
 -- Records of Products
 -- --------------------------
 BEGIN;
-INSERT INTO `Products` VALUES(1,"xe dap",100000,'xeeeeeee');
-INSERT INTO `Products` VALUES(2,"xe may",1000000,'xeeeeeee may');
-INSERT INTO `Products` VALUES(3,"xe hoi",1000000,'xeeeeeee hoii');
-INSERT INTO `Products` VALUES(4,"xe lan",10000,'xeeeeeee lan');
+INSERT INTO `Products` VALUES(1,"xe dap",100000);
+INSERT INTO `Products` VALUES(2,"xe may",1000000);
+INSERT INTO `Products` VALUES(3,"xe hoi",1000000);
+INSERT INTO `Products` VALUES(4,"xe lan",10000);
 COMMIT;
+
+
+
+-- --------------------------
+-- Table structure for ProductDescription
+-- --------------------------
+DROP TABLE IF EXISTS `ProductDescription`;
+CREATE TABLE `ProductDescription`(
+`proID` int unsigned NOT NULL AUTO_INCREMENT,
+`fullDes` text COLLATE utf8_unicode_ci NOT NULL ,
+PRIMARY KEY (`proID`),
+FOREIGN KEY (`proID`) REFERENCES `Products` (`proID`)
+) ENGINE=MyISAM auto_increment=4 default  charset=utf8 COLLATE=utf8_unicode_ci;
+-- --------------------------
+-- Records of Products
+-- --------------------------
+BEGIN;
+INSERT INTO `ProductDescription` VALUES(1,"xeeeeeee dap");
+INSERT INTO `ProductDescription` VALUES(2,'xeeeeeee may');
+INSERT INTO `ProductDescription` VALUES(3,'xeeeeeee hoii');
+INSERT INTO `ProductDescription` VALUES(4,'xeeeeeee lan');
+COMMIT;
+
+
 
 
 
@@ -77,7 +100,7 @@ CREATE TABLE `ProductDetails`(
 `SKU` nvarchar(50) COLLATE utf8_unicode_ci NOT NULL,
 PRIMARY KEY (`proID`),
 FOREIGN KEY (`proID`) REFERENCES `Products` (`proID`)
-) ENGINE=MyISAM auto_increment=10000 default  charset=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM auto_increment=4 default  charset=utf8 COLLATE=utf8_unicode_ci;
 -- --------------------------
 -- Records of ProductDetails
 -- --------------------------

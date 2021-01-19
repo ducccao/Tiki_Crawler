@@ -1,6 +1,7 @@
 const functionsTechnical = require("./../functionsCrawlTechnical/functions");
 const config = require("./../config/default.json");
 const proDetailController = require("./../controllers/proDetail.controller");
+const productController = require("./../controllers/product.controller");
 
 module.exports = {
     // When You Start App
@@ -17,6 +18,18 @@ module.exports = {
             config.database.table.productdetails
         );
 
-        console.log(insertProDetailStatus);
+        //  console.log(insertProDetailStatus);
+        return insertProDetailStatus;
+    },
+
+    // Crawl Product
+    async CrawlProduct($) {
+        const entity = functionsTechnical.CrawlProductTech($);
+        // const insertProductStatus = await productController.insertRecordsIntoDB(
+        //     entity,
+        //     config.database.table.products
+        // );
+
+        //  console.log(insertProductStatus);
     },
 };
