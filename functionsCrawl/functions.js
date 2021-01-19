@@ -1,4 +1,4 @@
-const functionsTechnical = require("./../functionsCrawlTechnical/functions");
+const functionsTechnical = require("./../functionsCrawlHanlder/functions");
 const config = require("./../config/default.json");
 const proDetailController = require("./../controllers/proDetail.controller");
 const productController = require("./../controllers/product.controller");

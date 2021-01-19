@@ -41,6 +41,8 @@ function crawl(url) {
 const url = `https://tiki.vn/combo-2-lan-khu-mui-nuoc-hoa-enchanteur-charming-50ml-chai-p58673652.html`;
 // URL - Products
 const url2 = `https://tiki.vn/lam-dep-suc-khoe/c1520`;
+const proURL_2 = `https://tiki.vn/lam-dep-suc-khoe/c1520?page=2&src=c.1520.hamburger_menu_fly_out_banner`;
+const proURL_3 = `https://tiki.vn/lam-dep-suc-khoe/c1520?page=3&src=c.1520.hamburger_menu_fly_out_banner`;
 // URL - User
 const url3 = `https://freetuts.net/reactjs/tu-hoc-reactjs`;
 
@@ -49,7 +51,7 @@ const url3 = `https://freetuts.net/reactjs/tu-hoc-reactjs`;
 //-- Input: URL
 //-- Output: Records In Database
 //-------------------------
-crawl(url2);
+crawl(proURL_3);
 
 //-------------------------
 //-- Watch Records Database
