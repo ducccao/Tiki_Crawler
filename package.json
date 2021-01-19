@@ -25,6 +25,8 @@
     "get-urls": "^10.0.0",
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.1",
-    "puppeteer": "^5.5.0"
+    "node-html-crawler": "^1.1.3",
+    "puppeteer": "^5.5.0",
+    "request-promise": "^4.2.6"
   }
 }

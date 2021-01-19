@@ -16,8 +16,15 @@
     "tiki": {
         "user": {
             "usernameTag": "span",
-            "wrapClass": "review-comment__avatar",
+            "wrapClass": "review-comment__avatar-wrap",
             "usernameClass": "review-comment__avatar-name"
+        },
+        "productDetails": {
+            "tableWrapClass": ".has-table"
+        },
+        "fullDes": {
+            "tableWrapClass": ".has-table"
+
         }
     }
 }

@@ -17,4 +17,7 @@ module.exports = {
     load: (sql) => {
         return pool_query(sql);
     },
+    insert: (entity, tableName) => {
+        return pool_query(`insert into ${tableName} set ? `, entity);
+    },
 };
