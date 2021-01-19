@@ -24,12 +24,12 @@ module.exports = {
 
     // Crawl Product
     async CrawlProduct($) {
-        const entity = functionsTechnical.CrawlProductTech($);
-        // const insertProductStatus = await productController.insertRecordsIntoDB(
-        //     entity,
-        //     config.database.table.products
-        // );
+        const records = functionsTechnical.CrawlProductTech($);
+        const insertProductStatus = await productController.insertManyIntoDB(
+            records,
+            config.database.table.products
+        );
 
-        //  console.log(insertProductStatus);
+        console.log(insertProductStatus);
     },
 };

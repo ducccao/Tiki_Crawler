@@ -31,17 +31,46 @@ module.exports = {
     // Crawl Product Tech
     CrawlProductTech: ($) => {
         const proNameTrigger = config.tiki.products.proName;
-        const core = $(`${proNameTrigger}`);
+        const coreProName = $(`${proNameTrigger}`);
         const proNameDataArray = [];
 
-        for (let i = 0; i < core.length; ++i) {
-            for (let j = 0; j < core[i].children.length; j++) {
+        for (let i = 0; i < coreProName.length; ++i) {
+            for (let j = 0; j < coreProName[i].children.length; j++) {
                 proNameDataArray.push({
-                    proName: core[i].children[j].data,
+                    proName: coreProName[i].children[j].data,
                 });
             }
         }
 
-        console.log(proNameDataArray);
+        const priceTrigger = config.tiki.products.price;
+        const corePrice = $(`${priceTrigger}`);
+        const priceDataArray = [];
+
+        for (let i = 0; i < corePrice.length; ++i) {
+            for (let j = 0; j < corePrice[i].children.length; j++) {
+                priceDataArray.push({
+                    price: corePrice[i].children[j].data,
+                });
+            }
+        }
+
+        //  console.log(coreProName.length);
+        // console.log(corePrice.length);
+
+        //  console.log(proNameDataArray);
+        //  console.log(priceDataArray);
+
+        const mergeArray = [];
+
+        for (let k = 0; k < proNameDataArray.length; k++) {
+            const product = {
+                proName: proNameDataArray[k].proName,
+                price: priceDataArray[k].price,
+            };
+            mergeArray.push(product);
+        }
+
+        //  console.log(mergeArray);
+        return mergeArray;
     },
 };

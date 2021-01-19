@@ -28,7 +28,7 @@ function crawl(url) {
         // Crawl product Details
         //  const proDetailStatus = await functions.CrawlProductDetail($);
 
-        console.log(proDetailStatus);
+        // console.log(proDetailStatus);
         //   console.log(productStatus);
     })();
 }

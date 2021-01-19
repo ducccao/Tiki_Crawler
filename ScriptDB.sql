@@ -26,10 +26,10 @@ use titkicrawler;
 DROP TABLE IF EXISTS `Users`;
 CREATE TABLE `Users`(
 `userID` int unsigned NOT NULL AUTO_INCREMENT,
-`userName` nvarchar(50) COLLATE utf8_unicode_ci NOT NULL,
+`userName` nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
 `commentID` int unsigned NOT NULL ,
 PRIMARY KEY (`userID`)
-) ENGINE=MyISAM auto_increment=4 default  charset=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM auto_increment=7 default  charset=utf8 COLLATE=utf8_unicode_ci;
 -- --------------------------
 -- Records of Users
 -- --------------------------
@@ -48,10 +48,10 @@ COMMIT;
 DROP TABLE IF EXISTS `Products`;
 CREATE TABLE `Products`(
 `proID` int unsigned NOT NULL AUTO_INCREMENT,
-`proName` nvarchar(50) COLLATE utf8_unicode_ci NOT NULL,
-`price` int unsigned NOT NULL ,
+`proName`  nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
+`price` nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
 PRIMARY KEY (`proID`)
-) ENGINE=MyISAM auto_increment=4 default  charset=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM auto_increment=7 default  charset=utf8 COLLATE=utf8_unicode_ci;
 -- --------------------------
 -- Records of Products
 -- --------------------------
@@ -73,7 +73,7 @@ CREATE TABLE `ProductDescription`(
 `fullDes` text COLLATE utf8_unicode_ci NOT NULL ,
 PRIMARY KEY (`proID`),
 FOREIGN KEY (`proID`) REFERENCES `Products` (`proID`)
-) ENGINE=MyISAM auto_increment=4 default  charset=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM auto_increment=7 default  charset=utf8 COLLATE=utf8_unicode_ci;
 -- --------------------------
 -- Records of Products
 -- --------------------------
@@ -94,13 +94,13 @@ COMMIT;
 DROP TABLE IF EXISTS `ProductDetails`;
 CREATE TABLE `ProductDetails`(
 `proID` int(20) unsigned NOT NULL AUTO_INCREMENT,
-`tradeMark` nvarchar(50) COLLATE utf8_unicode_ci NOT NULL,
-`branchOrigin` nvarchar(50) COLLATE utf8_unicode_ci NOT NULL,
-`expiryDate` nvarchar(50) COLLATE utf8_unicode_ci NOT NULL,
-`SKU` nvarchar(50) COLLATE utf8_unicode_ci NOT NULL,
+`tradeMark` nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
+`branchOrigin`  nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
+`expiryDate` nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
+`SKU`  nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
 PRIMARY KEY (`proID`),
 FOREIGN KEY (`proID`) REFERENCES `Products` (`proID`)
-) ENGINE=MyISAM auto_increment=4 default  charset=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM auto_increment=7 default  charset=utf8 COLLATE=utf8_unicode_ci;
 -- --------------------------
 -- Records of ProductDetails
 -- --------------------------

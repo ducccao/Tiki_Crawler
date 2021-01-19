@@ -23,11 +23,12 @@
             "tableWrapClass": ".has-table"
         },
         "products": {
-            "proName": ".name span"
+            "proName": ".name span",
+            "price": ".price-discount__price"
         },
-        "fullDes": {
-            "tableWrapClass": ".has-table"
-
+        "proDesciption": {
+            "fullDes": ""
         }
+
     }
 }
