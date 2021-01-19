@@ -1,19 +1,9 @@
 const cheerio = require("cheerio");
-const express = require("express");
-const db = require("./database/ConnectDB");
 const config = require("./config/default.json");
 const query = require("./database/query");
-const crawler = require("crawler");
 const rp = require("request-promise");
-const fs = require("fs");
-const functions = require("./functions/functions");
-const proDetailController = require("./controllers/proDetail.controller");
+const functions = require("./functionsCrawl/functions");
 
-const url = `https://tiki.vn/combo-2-lan-khu-mui-nuoc-hoa-enchanteur-charming-50ml-chai-p58673652.html`;
-
-const url2 = `https://tiki.vn/combo-2-lan-khu-mui-nuoc-hoa-enchanteur-charming-50ml-chai-p58673652/nhan-xet/5180704`;
-
-const URL = `https://freetuts.net/reactjs/tu-hoc-reactjs`;
 // Queue URLs with custom callbacks & parameters
 
 function crawl(url) {
@@ -42,25 +32,44 @@ function crawl(url) {
         const fullDesWrap = config.tiki.fullDes.tableWrapClass;
         const fullDesContent = $(`${fullDesWrap} td`).text().trim();
         // Crawl product Details
-        const proDetail = [];
-        const CrawlProDetailDataEntity = functions.CrawlProductDetail($);
-        const insertProDetailStatus = await proDetailController.insertCrawlRecordsIntoDatabase(
-            CrawlProDetailDataEntity,
-            config.database.table.productdetails
-        );
-
-        console.log(insertProDetailStatus);
+        functions.CrawlProductDetail($);
+        // Crawl
     })();
 }
 
+//-------------------------
+//-- Common Input
+//-------------------------
+
+const url = `https://tiki.vn/combo-2-lan-khu-mui-nuoc-hoa-enchanteur-charming-50ml-chai-p58673652.html`;
+const url2 = `https://tiki.vn/combo-2-lan-khu-mui-nuoc-hoa-enchanteur-charming-50ml-chai-p58673652/nhan-xet/5180704`;
+const url3 = `https://freetuts.net/reactjs/tu-hoc-reactjs`;
+
+//-------------------------
+//-- Functions Crawl
+//-- Input: URL
+//-- Output: Records In Database
+//-------------------------
 crawl(url);
-//crawl(url2);
 
-//crawl(url);
-
-async function HookProduct() {
+//-------------------------
+//-- Watch Records Database
+//-------------------------
+async function HookProducts() {
     const products = await query.getAllProducts();
     console.log(products);
 }
 
+async function HookUsers() {
+    const users = await query.getAllUsers();
+    console.log(users);
+}
+
+async function HookProDetails() {
+    const proDetails = await query.getAllProDetails();
+    console.log(proDetails);
+}
+
 // HookProduct();
+// HookUsers();
+// HookProDetails();

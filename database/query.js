@@ -12,4 +12,9 @@ module.exports = {
         const products = db.load(sql);
         return products;
     },
+    getAllProDetails: () => {
+        const sql = `select * from ${config.database.table.productdetails}`;
+        const proDetails = db.load(sql);
+        return proDetails;
+    },
 };

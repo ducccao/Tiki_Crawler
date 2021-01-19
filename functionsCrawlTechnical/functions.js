@@ -1,8 +1,8 @@
-const config = require("./../config/default.json");
+const config = require("../config/default.json");
 
 module.exports = {
     // Crawl Product Detail Handler
-    CrawlProductDetail: ($) => {
+    CrawlProductDetailTechnical: ($) => {
         const proDetailsWrap = config.tiki.productDetails.tableWrapClass;
         const core = $(`${proDetailsWrap} tr > td:nth-child(2)`);
         //   const proDetailContent = $(`${proDetailsWrap} tr > td:nth-child(2)`).text();
