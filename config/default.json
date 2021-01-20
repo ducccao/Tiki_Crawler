@@ -10,6 +10,7 @@
         "table": {
             "productdetails": "productdetails",
             "products": "products",
+            "productdescription": "productdescription",
             "users": "users"
         }
     },
@@ -30,7 +31,9 @@
 
         },
         "proDesciption": {
-            "fullDes": ""
+            "fullDes": ".iDwhRg",
+            "fullDes_2": ".ToggleContent__View-sc-1hm81e2-0",
+            "fullDesWrapper": ".content"
         }
 
     }

@@ -28,8 +28,11 @@ function crawl(url) {
         // console.log(productStatus);
 
         // Crawl product Details
-        const prodtManyStatus = await functions.CrawManyProDetail();
-        console.log(prodtManyStatus);
+        //const prodtManyStatus = await functions.CrawManyProDetail();
+        // console.log(prodtManyStatus);
+
+        // Crawl FullDes 1 product
+        const fullDes1Status = await functions.CrawFullDes($);
     })();
 }
 
@@ -43,6 +46,10 @@ const url = `https://tiki.vn/combo-2-lan-khu-mui-nuoc-hoa-enchanteur-charming-50
 const url2 = `https://tiki.vn/lam-dep-suc-khoe/c1520`;
 const proURL_2 = `https://tiki.vn/lam-dep-suc-khoe/c1520?page=2&src=c.1520.hamburger_menu_fly_out_banner`;
 const proURL_3 = `https://tiki.vn/lam-dep-suc-khoe/c1520?page=3&src=c.1520.hamburger_menu_fly_out_banner`;
+
+// URL - FULDES
+const fullDesURL_1 = `https://tiki.vn/dung-cu-giai-toa-cho-nu-rung-ngoay-love-vibe-ssi-japan-chat-lieu-silicone-cao-cap-mem-mai-5-tan-so-rung-ngoay-p73885155.html?spid=73885161`;
+const fullDesURL_2 = `https://tiki.vn/bon-ngam-chan-hong-ngoai-lanaform-luxury-p12219567.html?spid=73720823&src=ss-ads`;
 // URL - User
 const url3 = `https://freetuts.net/reactjs/tu-hoc-reactjs`;
 
@@ -51,7 +58,7 @@ const url3 = `https://freetuts.net/reactjs/tu-hoc-reactjs`;
 //-- Input: URL
 //-- Output: Records In Database
 //-------------------------
-crawl(proURL_3);
+crawl(fullDesURL_2);
 
 //-------------------------
 //-- Watch Records Database
@@ -82,3 +89,11 @@ async function CrawlProDetailHander() {
     const status = await functions.CrawManyProDetail();
 }
 //CrawlProDetailHander();
+
+//-------------------------
+//-- Crawl Prodetail
+//-------------------------
+async function CrawlFullDesHanler() {
+    // const status = await functions.CrawFullDes($);
+}
+//CrawlFullDesHanler();

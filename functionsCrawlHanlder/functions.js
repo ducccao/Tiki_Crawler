@@ -161,4 +161,12 @@ module.exports = {
             return status;
         })();
     },
+
+    // Crawl fullDes
+    CrawlFullDes: async($) => {
+        const fullDesTrigger = config.tiki.proDesciption.fullDes_2;
+        const coreFullDes = $(`${fullDesTrigger} div`).text();
+
+        return coreFullDes;
+    },
 };

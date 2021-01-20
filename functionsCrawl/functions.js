@@ -3,6 +3,7 @@ const config = require("./../config/default.json");
 const proDetailController = require("./../controllers/proDetail.controller");
 const productController = require("./../controllers/product.controller");
 const productModel = require("../models/product.model");
+const fulDessModel = require("./../models/fullDes.model");
 
 module.exports = {
     // When You Start App
@@ -54,5 +55,20 @@ module.exports = {
 
         //  return `Inserted Into ${config.database.table.productdetails} -  ${count} Records!`;
         // console.log(prodtURLArr);
+    },
+
+    // Crawl fullDes
+    async CrawFullDes($) {
+        const fullDesCrawled = await functionsTechnical.CrawlFullDes($);
+
+        const entity = {
+            fullDes: `${fullDesCrawled}`,
+        };
+
+        const status = await fulDessModel.insert(
+            entity,
+            config.database.table.productdescription
+        );
+        console.log(status);
     },
 };
