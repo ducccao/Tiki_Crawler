@@ -29,7 +29,7 @@ module.exports = {
             records,
             config.database.table.products
         );
-
         console.log(insertProductStatus);
+        return insertProductStatus;
     },
 };

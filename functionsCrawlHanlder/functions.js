@@ -30,6 +30,7 @@ module.exports = {
 
     // Crawl Product Tech
     CrawlProductTech: ($) => {
+        // proName
         const proNameTrigger = config.tiki.products.proName;
         const coreProName = $(`${proNameTrigger}`);
         const proNameDataArray = [];
@@ -41,6 +42,8 @@ module.exports = {
                 });
             }
         }
+
+        // proPrice
 
         const priceTrigger = config.tiki.products.price;
         const corePrice = $(`${priceTrigger}`);
@@ -60,17 +63,29 @@ module.exports = {
         //  console.log(proNameDataArray);
         //  console.log(priceDataArray);
 
+        // proDetailURL
+        const prodtURLTrigger = config.tiki.products.proDetailURL;
+        const coreURL = $(`${prodtURLTrigger}`);
+        const prodtURLArray = [];
+
+        for (let d = 0; d < coreURL.length; ++d) {
+            prodtURLArray.push({
+                proDetailURL: coreURL[d].attribs.href,
+            });
+        }
+
         const mergeArray = [];
 
         for (let k = 0; k < proNameDataArray.length; k++) {
             const product = {
                 proName: proNameDataArray[k].proName,
                 price: priceDataArray[k].price,
+                proDetailURL: prodtURLArray[k].proDetailURL,
             };
             mergeArray.push(product);
         }
 
-        //  console.log(mergeArray);
+        console.log(mergeArray);
         return mergeArray;
     },
 };
