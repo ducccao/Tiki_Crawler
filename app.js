@@ -24,12 +24,12 @@ function crawl(url) {
         }
 
         // Crawl product
-        const productStatus = await functions.CrawlProduct($);
-        // Crawl product Details
-        //  const proDetailStatus = await functions.CrawlProductDetail($);
+        //const productStatus = await functions.CrawlProduct($);
+        // console.log(productStatus);
 
-        // console.log(proDetailStatus);
-        //   console.log(productStatus);
+        // Crawl product Details
+        const prodtManyStatus = await functions.CrawManyProDetail();
+        console.log(prodtManyStatus);
     })();
 }
 
@@ -74,3 +74,11 @@ async function HookProDetails() {
 // HookProduct();
 // HookUsers();
 // HookProDetails();
+
+//-------------------------
+//-- Crawl Prodetail
+//-------------------------
+async function CrawlProDetailHander() {
+    const status = await functions.CrawManyProDetail();
+}
+//CrawlProDetailHander();

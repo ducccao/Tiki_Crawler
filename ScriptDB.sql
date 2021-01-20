@@ -50,16 +50,17 @@ CREATE TABLE `Products`(
 `proID` int unsigned NOT NULL AUTO_INCREMENT,
 `proName`  nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
 `price` nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
+`proDetailURL`  nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
 PRIMARY KEY (`proID`)
 ) ENGINE=MyISAM auto_increment=7 default  charset=utf8 COLLATE=utf8_unicode_ci;
 -- --------------------------
 -- Records of Products
 -- --------------------------
 BEGIN;
-INSERT INTO `Products` VALUES(1,"xe dap",100000);
-INSERT INTO `Products` VALUES(2,"xe may",1000000);
-INSERT INTO `Products` VALUES(3,"xe hoi",1000000);
-INSERT INTO `Products` VALUES(4,"xe lan",10000);
+INSERT INTO `Products` VALUES(1,"xe dap","xedap@html.com" ,'/xe-dap-cho-be-gai-banh-12-14-16-18-20-inch-cho-be-mau-moi-nhat-p52626294.html?spid=74198844&src=search_ads');
+INSERT INTO `Products` VALUES(2,"xe may","xemay@html.com" ,'/xe-dap-cho-be-gai-banh-12-14-16-18-20-inch-cho-be-mau-moi-nhat-p52626294.html?spid=74198844&src=search_ads');
+INSERT INTO `Products` VALUES(3,"xe hoi","xehoi@html.com" ,'/xe-dap-cho-be-gai-banh-12-14-16-18-20-inch-cho-be-mau-moi-nhat-p52626294.html?spid=74198844&src=search_ads');
+INSERT INTO `Products` VALUES(4,"xe lan","xelan@html.com" ,'/xe-dap-cho-be-gai-banh-12-14-16-18-20-inch-cho-be-mau-moi-nhat-p52626294.html?spid=74198844&src=search_ads');
 COMMIT;
 
 
@@ -94,10 +95,11 @@ COMMIT;
 DROP TABLE IF EXISTS `ProductDetails`;
 CREATE TABLE `ProductDetails`(
 `proID` int(20) unsigned NOT NULL AUTO_INCREMENT,
-`tradeMark` nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
-`branchOrigin`  nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
-`expiryDate` nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
-`SKU`  nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
+`tradeMark` nvarchar(5000) COLLATE utf8_unicode_ci ,
+`branchOrigin`  nvarchar(5000) COLLATE utf8_unicode_ci ,
+`branch`  text,
+`expiryDate` nvarchar(5000) COLLATE utf8_unicode_ci,
+`SKU`  nvarchar(5000) COLLATE utf8_unicode_ci,
 PRIMARY KEY (`proID`),
 FOREIGN KEY (`proID`) REFERENCES `Products` (`proID`)
 ) ENGINE=MyISAM auto_increment=7 default  charset=utf8 COLLATE=utf8_unicode_ci;
@@ -107,10 +109,10 @@ FOREIGN KEY (`proID`) REFERENCES `Products` (`proID`)
 
 
 BEGIN;
-INSERT INTO `ProductDetails` VALUES(1,"Viet Nam",'VN','Hết hạn sau 20 năm','1219366796178');
-INSERT INTO `ProductDetails` VALUES(2,"Nhat Bon",'Japan','Hết hạn sau 40 năm','1219366796171');
-INSERT INTO `ProductDetails` VALUES(3,"Duc",'Germany','Hết hạn sau 60 năm','1219366796177');
-INSERT INTO `ProductDetails` VALUES(4,"Viet Nam",'VN','Hết hạn sau 80 năm','1219366796172');
+INSERT INTO `ProductDetails` VALUES(1, "OEM","Viet Nam",'VN','Hết hạn sau 20 năm','1219366796178');
+INSERT INTO `ProductDetails` VALUES(2,"OEM","Nhat Bon",'Japan','Hết hạn sau 40 năm','1219366796171');
+INSERT INTO `ProductDetails` VALUES(3,"OEM","Duc",'Germany','Hết hạn sau 60 năm','1219366796177');
+INSERT INTO `ProductDetails` VALUES(4,"OEM","Viet Nam",'VN','Hết hạn sau 80 năm','1219366796172');
 COMMIT;
 
 

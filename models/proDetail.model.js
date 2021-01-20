@@ -5,4 +5,7 @@ module.exports = {
     insertCrawlRecordsIntoDatabase: (entity, tableName) => {
         return db.insert(entity, tableName);
     },
+    insert: (entity, tableName) => {
+        return db.insert(entity, tableName);
+    },
 };

@@ -1,4 +1,8 @@
 const config = require("../config/default.json");
+const cheerio = require("cheerio");
+const request_promise = require("request-promise");
+const proDetailModel = require("./../models/proDetail.model");
+const productModel = require("../models/product.model");
 
 module.exports = {
     // Crawl Product Detail Technical
@@ -85,7 +89,76 @@ module.exports = {
             mergeArray.push(product);
         }
 
-        console.log(mergeArray);
+        //   console.log(mergeArray);
         return mergeArray;
+    },
+
+    // Crawl Many ProDetail
+    CrawlManyProDetal: async(url) => {
+        const options = {
+            uri: url,
+            transform: function(body) {
+                //  console.log(body.body);
+                return cheerio.load(body);
+            },
+        };
+
+        (async function crawler() {
+            try {
+                var $ = await request_promise(options);
+            } catch (error) {
+                return error;
+            }
+
+            const proDetailsWrap = config.tiki.productDetails.tableWrapClass;
+            const core = $(`${proDetailsWrap} tr > td:nth-child(2)`);
+
+            //  console.log(core);
+
+            const proDetailArrayData = [];
+            const proDetailData = [];
+
+            for (let i = 0; i < core.length; ++i) {
+                for (let j = 0; j < core[i].children.length; ++j) {
+                    proDetailArrayData.push(core[i].children[j].data);
+                }
+            }
+
+            // handle SKU -- Expire day
+            if (
+                typeof proDetailArrayData[4] === "undefined" &&
+                typeof proDetailArrayData[3] === "undefined"
+            ) {
+                proDetailData.push({
+                    tradeMark: proDetailArrayData[0],
+                    branchOrigin: proDetailArrayData[1],
+                    SKU: proDetailArrayData[3],
+                });
+            } else if (typeof proDetailArrayData[4] === "undefined") {
+                proDetailData.push({
+                    tradeMark: proDetailArrayData[0],
+                    branchOrigin: proDetailArrayData[1],
+                    branch: proDetailArrayData[2],
+                    SKU: proDetailArrayData[3],
+                });
+            } else {
+                proDetailData.push({
+                    tradeMark: proDetailArrayData[0],
+                    branchOrigin: proDetailArrayData[1],
+                    branch: proDetailArrayData[2],
+                    expiryDate: proDetailArrayData[3],
+                    SKU: proDetailArrayData[4],
+                });
+            }
+
+            const status = await proDetailModel.insert(
+                proDetailData,
+                config.database.table.productdetails
+            );
+
+            console.log(status);
+
+            return status;
+        })();
     },
 };
