@@ -4,6 +4,7 @@ const proDetailController = require("./../controllers/proDetail.controller");
 const productController = require("./../controllers/product.controller");
 const productModel = require("../models/product.model");
 const fulDessModel = require("./../models/fullDes.model");
+const fullDesModel = require("./../models/fullDes.model");
 
 module.exports = {
     // When You Start App
@@ -70,5 +71,20 @@ module.exports = {
             config.database.table.productdescription
         );
         console.log(status);
+    },
+
+    async CrawManyFullDes() {
+        const arrFuldesURLData = await fullDesModel.getManyURLFulDes();
+        const arrFuldesURL = [];
+        for (let i = 0; i < arrFuldesURLData.length; ++i) {
+            arrFuldesURL.push(arrFuldesURLData[i].proDetailURL);
+        }
+        //console.log(arrFuldesURL);
+
+        for (let i = 0; i < arrFuldesURL.length; ++i) {
+            const status = await functionsTechnical.CrawlManyFulDes(
+                config.tiki.pure_url + arrFuldesURL[i]
+            );
+        }
     },
 };

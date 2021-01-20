@@ -23,16 +23,19 @@ function crawl(url) {
             return error;
         }
 
-        // Crawl product
+        // Crawl Many product
         //const productStatus = await functions.CrawlProduct($);
         // console.log(productStatus);
 
-        // Crawl product Details
-        //const prodtManyStatus = await functions.CrawManyProDetail();
-        // console.log(prodtManyStatus);
+        // Crawl Many product Details
+        // const prodtManyStatus = await functions.CrawManyProDetail();
+        //console.log(prodtManyStatus);
 
         // Crawl FullDes 1 product
-        const fullDes1Status = await functions.CrawFullDes($);
+        //const fullDes1Status = await functions.CrawFullDes($);
+
+        // Crawl Many FulDes
+        // const fulDesManyStatus = await functions.CrawManyFullDes();
     })();
 }
 
@@ -53,12 +56,15 @@ const fullDesURL_2 = `https://tiki.vn/bon-ngam-chan-hong-ngoai-lanaform-luxury-p
 // URL - User
 const url3 = `https://freetuts.net/reactjs/tu-hoc-reactjs`;
 
+// URL  - PURE
+const PURE_URL = `https://tiki.vn/lam-dep-suc-khoe/c1520?src=c.1520.hamburger_menu_fly_out_banner`;
+
 //-------------------------
 //-- Functions Crawl
 //-- Input: URL
 //-- Output: Records In Database
 //-------------------------
-crawl(fullDesURL_2);
+crawl(PURE_URL);
 
 //-------------------------
 //-- Watch Records Database

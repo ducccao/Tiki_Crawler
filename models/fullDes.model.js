@@ -5,4 +5,8 @@ module.exports = {
     insert: (entity, tbName) => {
         return db.insert(entity, tbName);
     },
+    getManyURLFulDes: () => {
+        const sql = `select proDetailURL from ${config.database.table.products}`;
+        return db.load(sql);
+    },
 };

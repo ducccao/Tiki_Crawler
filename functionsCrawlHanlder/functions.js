@@ -3,6 +3,7 @@ const cheerio = require("cheerio");
 const request_promise = require("request-promise");
 const proDetailModel = require("./../models/proDetail.model");
 const productModel = require("../models/product.model");
+const fullDesModel = require("../models/fullDes.model");
 
 module.exports = {
     // Crawl Product Detail Technical
@@ -168,5 +169,38 @@ module.exports = {
         const coreFullDes = $(`${fullDesTrigger} div`).text();
 
         return coreFullDes;
+    },
+
+    // Crawl many fulDes
+    CrawlManyFulDes: async(url) => {
+        const options = {
+            uri: url,
+            transform: function(body) {
+                //  console.log(body.body);
+                return cheerio.load(body);
+            },
+        };
+
+        (async function crawler() {
+            try {
+                var $ = await request_promise(options);
+            } catch (error) {
+                return error;
+            }
+            const fullDesTrigger = config.tiki.proDesciption.fullDes_2;
+            const coreFullDes = $(`${fullDesTrigger} div`).text();
+
+            const entity = {
+                fullDes: coreFullDes,
+            };
+
+            const status = await fullDesModel.insert(
+                entity,
+                config.database.table.productdescription
+            );
+
+            console.log(status);
+            return;
+        })();
     },
 };
