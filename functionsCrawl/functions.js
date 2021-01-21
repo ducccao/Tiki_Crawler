@@ -8,6 +8,7 @@ const fullDesModel = require("./../models/fullDes.model");
 const axios = require("axios");
 const chalk = require("chalk");
 const cheerio = require("cheerio");
+const userModel = require("./../models/user.model");
 
 module.exports = {
   // When You Start App
@@ -77,6 +78,7 @@ module.exports = {
     console.log(status);
   },
 
+  // Crawl many fuldes
   async CrawManyFullDes() {
     const arrFuldesURLData = await fullDesModel.getManyURLFulDes();
     const arrFuldesURL = [];
@@ -89,6 +91,46 @@ module.exports = {
     for (let i = 0; i < arrFuldesURL.length; ++i) {
       const status = await functionsTechnical.CrawlManyFulDes(
         config.tiki.pure_url + arrFuldesURL[i]
+      );
+      ret.push(status);
+    }
+
+    return ret;
+  },
+
+  // Crawl One User
+  async CrawlAnUser($) {
+    const userCrawled = await functionsTechnical.CrawlUser($);
+
+    const entity = {
+      fullDes: `${fullDesCrawled}`,
+    };
+
+    const status = await fulDessModel.insert(
+      entity,
+      config.database.table.productdescription
+    );
+    console.log(status);
+  },
+
+  // Crawl Many Users
+  async CrawManyUsers() {
+    const userURLArrData = await userModel.getManyUserURL();
+    const userURLArr = [];
+    const from = `6495600`;
+    const to = `6495999`;
+
+    const pure_url = `https://tiki.vn/bon-ngam-chan-massage-cao-cap-usa-6-con-lan-tu-dong-voi-phun-massage-serenelife-sliftsp12-nhap-khau-p69064268/nhan-xet/${from}`;
+    for (let i = from; i < to; ++i) {
+      const temp = `https://tiki.vn/bon-ngam-chan-massage-cao-cap-usa-6-con-lan-tu-dong-voi-phun-massage-serenelife-sliftsp12-nhap-khau-p69064268/nhan-xet/${i}`;
+      userURLArr.push(temp);
+    }
+    //console.log(arrFuldesURL);
+
+    const ret = [];
+    for (let i = 0; i < userURLArr.length; ++i) {
+      const status = await functionsTechnical.CrawlManyUsers(
+        config.tiki.pure_url + userURLArr[i]
       );
       ret.push(status);
     }

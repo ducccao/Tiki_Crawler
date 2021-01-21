@@ -1,60 +1,48 @@
-const rp = require("request-promise");
+const config = require("./config/default.json");
 const cheerio = require("cheerio");
-const fs = require("fs");
+const request_promise = require("request-promise");
+const proDetailModel = require("./models/proDetail.model");
+const productModel = require("./models/product.model");
+const fullDesModel = require("./models/fullDes.model");
+const chalk = require("chalk");
 
-const URL = `https://freetuts.net/reactjs/tu-hoc-reactjs`;
-
-const options = {
-    uri: URL,
-    transform: function(body) {
-        //Khi lấy dữ liệu từ trang thành công nó sẽ tự động parse DOM
-        return cheerio.load(body);
+// Crawl many User
+async function CrawlManyUsers(url) {
+  console.log(
+    chalk.red(`\n  Crawling of ${chalk.underline.bold(url)} initiated...\n`)
+  );
+  const options = {
+    uri: url,
+    transform: function (body) {
+      //  console.log(body.body);
+      return cheerio.load(body);
     },
-};
+  };
 
-(async function crawler() {
+  (async function crawler() {
     try {
-        // Lấy dữ liệu từ trang crawl đã được parseDOM
-        var $ = await rp(options);
+      var $ = await request_promise(options);
     } catch (error) {
-        return error;
+      return error;
     }
 
-    /* Lấy tên và miêu tả của tutorial*/
-    const title = $("#main_title").text().trim();
-    const description = $(".entry-content  p").text().trim();
+    const userTrigger = config.tiki.user.trigger;
+    const core = $(`.review-comment__avatar-name`).text();
 
-    // console.log(title);
-    console.log(description);
+    console.log(core);
 
-    /* Phân tích các table và sau đó lấy các posts.
-             Mỗi table là một chương 
-          */
-    const tableContent = $(".entry-content table");
-    let data = [];
-    for (let i = 0; i < tableContent.length; i++) {
-        let chaper = $(tableContent[i]);
-        // Tên của chương đó.
-        let chaperTitle = chaper.find("thead").text().trim();
+    // const entity = {
+    //   fullDes: core,
+    // };
 
-        //Tìm bài viết ở mỗi chương
-        let chaperData = [];
-        const chaperLink = chaper.find("tbody").find("a");
-        for (let j = 0; j < chaperLink.length; j++) {
-            const post = $(chaperLink[j]);
-            const postLink = post.attr("href");
-            const postTitle = post.text().trim();
-            chaperData.push({
-                postTitle,
-                postLink,
-            });
-        }
-        data.push({
-            chaperTitle,
-            chaperData,
-        });
-    }
+    // const status = await fullDesModel.insert(
+    //   entity,
+    //   config.database.table.productdescription
+    // );
+  })();
 
-    // Lưu dữ liệu về máy
-    fs.writeFileSync("data.json", JSON.stringify(data));
-})();
+  return "Inserted 1 FulDes";
+}
+
+const url = `https://tiki.vn/combo-2-lan-khu-mui-trang-da-enchanteur-charming-50ml-chai-p58676878/nhan-xet/6138877`;
+CrawlManyUsers(url);

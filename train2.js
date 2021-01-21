@@ -4,53 +4,44 @@ const cheerio = require("cheerio");
 const fs = require("fs");
 const chalk = require("chalk");
 
-const url = "https://tiki.vn/the-thao-da-ngoai/c1975?page=2";
+const url = "https://mybk.hcmut.edu.vn/my/index.action";
 const outputFile = "data.json";
 const parsedResults = [];
 const pageLimit = 10;
 let pageCounter = 0;
 let resultCount = 0;
 
-console.log(
-  chalk.yellow.bgBlue(
-    `\n  Scraping of ${chalk.underline.bold(url)} initiated...\n`
-  )
-);
-
 const getWebsiteContent = async (url) => {
   try {
+    console.log(
+      chalk.red(`\n  Scraping of ${chalk.underline.bold(url)} initiated...\n`)
+    );
+
     const response = await axios.get(url);
     const $ = cheerio.load(response.data);
 
     // New Lists
-    $(".wrapper .main .new article").map((i, el) => {
+    $(".item").map((i, el) => {
       const count = resultCount++;
-      const title = $(el).find("a").attr("href");
-      const url = $(el).find("h3").text();
+      const text = $(el).text();
+
       const metadata = {
         count: count,
-        title: title,
-        url: url,
+        text: text,
       };
-      parsedResults.push(metadata);
     });
+    parsedResults.push(1);
 
     // Pagination Elements Link
-    const nextPageLink = $(".pagination")
-      .find(".curr")
-      .parent()
-      .next()
-      .find("a")
-      .attr("href");
-    console.log(chalk.cyan(`  Scraping: ${nextPageLink}`));
+
     pageCounter++;
 
-    if (pageCounter === pageLimit) {
+    if (pageCounter === 200) {
       exportResults(parsedResults);
       return false;
     }
 
-    getWebsiteContent(nextPageLink);
+    getWebsiteContent(url);
 
     //   console.log($);
   } catch (error) {

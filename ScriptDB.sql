@@ -27,18 +27,68 @@ DROP TABLE IF EXISTS `Users`;
 CREATE TABLE `Users`(
 `userID` int unsigned NOT NULL AUTO_INCREMENT,
 `userName` nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
-`commentID` int unsigned NOT NULL ,
 PRIMARY KEY (`userID`)
-) ENGINE=MyISAM auto_increment=7 default  charset=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM auto_increment=1 default  charset=utf8 COLLATE=utf8_unicode_ci;
 -- --------------------------
 -- Records of Users
 -- --------------------------
-BEGIN;
-INSERT INTO `Users` VALUES(1,"duccao",1);
-INSERT INTO `Users` VALUES(2,"nghihua",2);
-INSERT INTO `Users` VALUES(3,"khanhbui",3);
-INSERT INTO `Users` VALUES(4,"ngankim",4);
-COMMIT;
+
+
+-- BEGIN;
+-- INSERT INTO `Users` VALUES(1,"duccao",1);
+-- INSERT INTO `Users` VALUES(2,"nghihua",2);
+-- INSERT INTO `Users` VALUES(3,"khanhbui",3);
+-- INSERT INTO `Users` VALUES(4,"ngankim",4);
+-- COMMIT;
+
+
+-- --------------------------
+-- Table structure for Comments
+-- --------------------------
+DROP TABLE IF EXISTS `Comments`;
+CREATE TABLE `Comments`(
+`userID` int unsigned NOT NULL AUTO_INCREMENT,
+`comment` nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
+PRIMARY KEY (`userID`),
+FOREIGN KEY (`userID`) REFERENCES  `Users` (`userID`)
+) ENGINE=MyISAM auto_increment=1 default  charset=utf8 COLLATE=utf8_unicode_ci;
+-- --------------------------
+-- Records of Comments
+-- --------------------------
+
+
+-- BEGIN;
+-- INSERT INTO `Comments` VALUES(1,"duccao",1);
+-- INSERT INTO `Comments` VALUES(2,"nghihua",2);
+-- INSERT INTO `Comments` VALUES(3,"khanhbui",3);
+-- INSERT INTO `Comments` VALUES(4,"ngankim",4);
+-- COMMIT;
+
+
+
+-- --------------------------
+-- Table structure for Rating
+-- --------------------------
+DROP TABLE IF EXISTS `Rating`;
+CREATE TABLE `Rating`(
+`userID` int unsigned NOT NULL AUTO_INCREMENT,
+`rate` int,
+PRIMARY KEY (`userID`),
+FOREIGN KEY (`userID`) REFERENCES  `Users` (`userID`)
+) ENGINE=MyISAM auto_increment=1 default  charset=utf8 COLLATE=utf8_unicode_ci;
+-- --------------------------
+-- Records of Comments
+-- --------------------------
+
+
+-- BEGIN;
+-- INSERT INTO `Rating` VALUES(1,"duccao",1);
+-- INSERT INTO `Rating` VALUES(2,"nghihua",2);
+-- INSERT INTO `Rating` VALUES(3,"khanhbui",3);
+-- INSERT INTO `Rating` VALUES(4,"ngankim",4);
+-- COMMIT;
+
+
 
 
 
@@ -52,16 +102,18 @@ CREATE TABLE `Products`(
 `price` nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
 `proDetailURL`  nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
 PRIMARY KEY (`proID`)
-) ENGINE=MyISAM auto_increment=7 default  charset=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM auto_increment=1 default  charset=utf8 COLLATE=utf8_unicode_ci;
 -- --------------------------
 -- Records of Products
 -- --------------------------
-BEGIN;
-INSERT INTO `Products` VALUES(1,"xe dap","xedap@html.com" ,'/xe-dap-cho-be-gai-banh-12-14-16-18-20-inch-cho-be-mau-moi-nhat-p52626294.html?spid=74198844&src=search_ads');
-INSERT INTO `Products` VALUES(2,"xe may","xemay@html.com" ,'/xe-dap-cho-be-gai-banh-12-14-16-18-20-inch-cho-be-mau-moi-nhat-p52626294.html?spid=74198844&src=search_ads');
-INSERT INTO `Products` VALUES(3,"xe hoi","xehoi@html.com" ,'/xe-dap-cho-be-gai-banh-12-14-16-18-20-inch-cho-be-mau-moi-nhat-p52626294.html?spid=74198844&src=search_ads');
-INSERT INTO `Products` VALUES(4,"xe lan","xelan@html.com" ,'/xe-dap-cho-be-gai-banh-12-14-16-18-20-inch-cho-be-mau-moi-nhat-p52626294.html?spid=74198844&src=search_ads');
-COMMIT;
+
+
+-- BEGIN;
+-- INSERT INTO `Products` VALUES(1,"xe dap","xedap@html.com" ,'/xe-dap-cho-be-gai-banh-12-14-16-18-20-inch-cho-be-mau-moi-nhat-p52626294.html?spid=74198844&src=search_ads');
+-- INSERT INTO `Products` VALUES(2,"xe may","xemay@html.com" ,'/xe-dap-cho-be-gai-banh-12-14-16-18-20-inch-cho-be-mau-moi-nhat-p52626294.html?spid=74198844&src=search_ads');
+-- INSERT INTO `Products` VALUES(3,"xe hoi","xehoi@html.com" ,'/xe-dap-cho-be-gai-banh-12-14-16-18-20-inch-cho-be-mau-moi-nhat-p52626294.html?spid=74198844&src=search_ads');
+-- INSERT INTO `Products` VALUES(4,"xe lan","xelan@html.com" ,'/xe-dap-cho-be-gai-banh-12-14-16-18-20-inch-cho-be-mau-moi-nhat-p52626294.html?spid=74198844&src=search_ads');
+-- COMMIT;
 
 
 
@@ -74,16 +126,19 @@ CREATE TABLE `ProductDescription`(
 `fullDes` text COLLATE utf8_unicode_ci NOT NULL ,
 PRIMARY KEY (`proID`),
 FOREIGN KEY (`proID`) REFERENCES `Products` (`proID`)
-) ENGINE=MyISAM auto_increment=7 default  charset=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM auto_increment=1 default  charset=utf8 COLLATE=utf8_unicode_ci;
 -- --------------------------
 -- Records of Products
 -- --------------------------
-BEGIN;
-INSERT INTO `ProductDescription` VALUES(1,"xeeeeeee dap");
-INSERT INTO `ProductDescription` VALUES(2,'xeeeeeee may');
-INSERT INTO `ProductDescription` VALUES(3,'xeeeeeee hoii');
-INSERT INTO `ProductDescription` VALUES(4,'xeeeeeee lan');
-COMMIT;
+
+
+
+-- BEGIN;
+-- INSERT INTO `ProductDescription` VALUES(1,"xeeeeeee dap");
+-- INSERT INTO `ProductDescription` VALUES(2,'xeeeeeee may');
+-- INSERT INTO `ProductDescription` VALUES(3,'xeeeeeee hoii');
+-- INSERT INTO `ProductDescription` VALUES(4,'xeeeeeee lan');
+-- COMMIT;
 
 
 
@@ -102,18 +157,18 @@ CREATE TABLE `ProductDetails`(
 `SKU`  nvarchar(5000) COLLATE utf8_unicode_ci,
 PRIMARY KEY (`proID`),
 FOREIGN KEY (`proID`) REFERENCES `Products` (`proID`)
-) ENGINE=MyISAM auto_increment=7 default  charset=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM auto_increment=1 default  charset=utf8 COLLATE=utf8_unicode_ci;
 -- --------------------------
 -- Records of ProductDetails
 -- --------------------------
 
 
-BEGIN;
-INSERT INTO `ProductDetails` VALUES(1, "OEM","Viet Nam",'VN','Hết hạn sau 20 năm','1219366796178');
-INSERT INTO `ProductDetails` VALUES(2,"OEM","Nhat Bon",'Japan','Hết hạn sau 40 năm','1219366796171');
-INSERT INTO `ProductDetails` VALUES(3,"OEM","Duc",'Germany','Hết hạn sau 60 năm','1219366796177');
-INSERT INTO `ProductDetails` VALUES(4,"OEM","Viet Nam",'VN','Hết hạn sau 80 năm','1219366796172');
-COMMIT;
+-- BEGIN;
+-- INSERT INTO `ProductDetails` VALUES(1, "OEM","Viet Nam",'VN','Hết hạn sau 20 năm','1219366796178');
+-- INSERT INTO `ProductDetails` VALUES(2,"OEM","Nhat Bon",'Japan','Hết hạn sau 40 năm','1219366796171');
+-- INSERT INTO `ProductDetails` VALUES(3,"OEM","Duc",'Germany','Hết hạn sau 60 năm','1219366796177');
+-- INSERT INTO `ProductDetails` VALUES(4,"OEM","Viet Nam",'VN','Hết hạn sau 80 năm','1219366796172');
+-- COMMIT;
 
 
 

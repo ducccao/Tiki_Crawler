@@ -19,7 +19,8 @@
         "user": {
             "usernameTag": "span",
             "wrapClass": "review-comment__avatar-wrap",
-            "usernameClass": "review-comment__avatar-name"
+            "usernameClass": "review-comment__avatar-name",
+            "trigger":".review-comment__avatar-name"
         },
         "productDetails": {
             "tableWrapClass": ".has-table"
@@ -40,5 +41,6 @@
             "fullDesWrapper": ".content"
         }
 
-    }
+    },
+    "hcmut":"https://mybk.hcmut.edu.vn/my/index.action"
 }

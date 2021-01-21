@@ -210,4 +210,42 @@ module.exports = {
 
     return "Inserted 1 FulDes";
   },
+
+  // Crawl many User
+  CrawlManyUsers: async (url) => {
+    console.log(
+      chalk.red(`\n  Crawling of ${chalk.underline.bold(url)} initiated...\n`)
+    );
+    const options = {
+      uri: url,
+      transform: function (body) {
+        //  console.log(body.body);
+        return cheerio.load(body);
+      },
+    };
+
+    (async function crawler() {
+      try {
+        var $ = await request_promise(options);
+      } catch (error) {
+        return error;
+      }
+
+      const userTrigger = config.tiki.user.trigger;
+      const core = $(`${userTrigger}`);
+
+      console.log(core);
+
+      // const entity = {
+      //   fullDes: core,
+      // };
+
+      // const status = await fullDesModel.insert(
+      //   entity,
+      //   config.database.table.productdescription
+      // );
+    })();
+
+    return "Inserted 1 FulDes";
+  },
 };

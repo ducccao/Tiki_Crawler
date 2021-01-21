@@ -13,21 +13,6 @@ const chalk = require("chalk");
 const outputFile = __dirname + `/result/users.json`;
 
 const parsedResults = [];
-const pageLimit = config.tiki.products.pagination.limit;
-let pageCounter = 1;
-let resultCount = 0;
-const url = `https://tiki.vn/lam-dep-suc-khoe/c1520?page=${pageCounter}&src=c.1520.hamburger_menu_fly_out_banner`;
-
-// Crawl Product
-async function CrawlProduct($) {
-  const records = functionsTechnical.CrawlProductTech($);
-  const insertProductStatus = await productController.insertManyIntoDB(
-    records,
-    config.database.table.products
-  );
-  //     console.log(insertProductStatus);
-  return insertProductStatus;
-}
 
 const exportResults = (parsedResults) => {
   fs.writeFile(outputFile, JSON.stringify(parsedResults, null, 4), (err) => {
@@ -47,46 +32,17 @@ const exportResults = (parsedResults) => {
 };
 
 // Crawl Pagi Product
-async function CrawlPagiProduct(url) {
+async function CrawlUser() {
   try {
-    console.log(
-      chalk.red(`\n  Crawling of ${chalk.underline.bold(url)} initiated...\n`)
-    );
+    const status = await functions.CrawManyUsers();
 
-    const response = await axios.get(url);
-    const $ = cheerio.load(response.data);
+    parsedResults.push(status);
 
-    const CrawlProductNotPagiStatus = await CrawlProduct($);
-    parsedResults.push(CrawlProductNotPagiStatus);
-    //   console.log(CrawlProductNotPagiStatus);
-
-    // Pagi
-    // const nextPageLink = $(`${config.tiki.products.pagination.wrapClass}`)
-    //   .find(".current")
-    //   .parent()
-    //   .next()
-    //   .find("a")
-    //   .attr("href");
-    // console.log(nextPageLink);
-    pageCounter++;
-
-    const nextPageLink = `https://tiki.vn/lam-dep-suc-khoe/c1520?page=${pageCounter}&src=c.1520.hamburger_menu_fly_out_banner`;
-
-    // console.log(chalk.cyan(`  Scraping: ${nextPageLink}`));
-    // console.log(chalk.yellow(`  PageCounter: ${pageCounter}`));
-
-    if (pageCounter > pageLimit) {
-      exportResults(parsedResults);
-      return false;
-    }
-
-    CrawlPagiProduct(nextPageLink);
-
-    //   console.log($);
+    exportResults(status);
   } catch (error) {
-    // exportResults(parsedResults);
+    exportResults(parsedResults);
     console.error(error);
   }
 }
 
-CrawlPagiProduct(url);
+CrawlUser();
