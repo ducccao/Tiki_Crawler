@@ -50,14 +50,15 @@ module.exports = {
 
     //  console.log(prodtURLArr);
 
-    let count = 0;
+    const ret = [];
     for (let i = 0; i < prodtURLArr.length; ++i) {
-      const prodtData = await functionsTechnical.CrawlManyProDetal(
+      const status = await functionsTechnical.CrawlManyProDetal(
         config.tiki.pure_url + prodtURLArr[i]
       );
+      ret.push(status);
     }
 
-    //  return `Inserted Into ${config.database.table.productdetails} -  ${count} Records!`;
+    return ret;
     // console.log(prodtURLArr);
   },
 
@@ -84,10 +85,14 @@ module.exports = {
     }
     //console.log(arrFuldesURL);
 
+    const ret = [];
     for (let i = 0; i < arrFuldesURL.length; ++i) {
       const status = await functionsTechnical.CrawlManyFulDes(
         config.tiki.pure_url + arrFuldesURL[i]
       );
+      ret.push(status);
     }
+
+    return ret;
   },
 };

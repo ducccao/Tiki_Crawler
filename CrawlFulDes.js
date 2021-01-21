@@ -10,23 +10,9 @@ const productController = require("./controllers/product.controller");
 const axios = require("axios");
 const chalk = require("chalk");
 
-const outputFile = "data.json";
-const parsedResults = [];
-const pageLimit = config.tiki.products.pagination.limit;
-let pageCounter = 1;
-let resultCount = 0;
-const url = `https://tiki.vn/lam-dep-suc-khoe/c1520?page=${pageCounter}&src=c.1520.hamburger_menu_fly_out_banner`;
+const outputFile = __dirname + `/result/fulDes.json`;
 
-// Crawl Product
-async function CrawlProduct($) {
-  const records = functionsTechnical.CrawlProductTech($);
-  const insertProductStatus = await productController.insertManyIntoDB(
-    records,
-    config.database.table.products
-  );
-  //     console.log(insertProductStatus);
-  return insertProductStatus;
-}
+const parsedResults = [];
 
 const exportResults = (parsedResults) => {
   fs.writeFile(outputFile, JSON.stringify(parsedResults, null, 4), (err) => {
@@ -46,46 +32,17 @@ const exportResults = (parsedResults) => {
 };
 
 // Crawl Pagi Product
-async function CrawlPagiProduct(url) {
+async function CrawlProDetail() {
   try {
-    console.log(
-      chalk.red(`\n  Crawling of ${chalk.underline.bold(url)} initiated...\n`)
-    );
+    const fuldesStatus = await functions.CrawManyFullDes();
 
-    const response = await axios.get(url);
-    const $ = cheerio.load(response.data);
+    parsedResults.push(fuldesStatus);
 
-    const CrawlProductNotPagiStatus = await CrawlProduct($);
-    parsedResults.push(CrawlProductNotPagiStatus);
-    //   console.log(CrawlProductNotPagiStatus);
-
-    // Pagi
-    // const nextPageLink = $(`${config.tiki.products.pagination.wrapClass}`)
-    //   .find(".current")
-    //   .parent()
-    //   .next()
-    //   .find("a")
-    //   .attr("href");
-    // console.log(nextPageLink);
-    pageCounter++;
-
-    const nextPageLink = `https://tiki.vn/lam-dep-suc-khoe/c1520?page=${pageCounter}&src=c.1520.hamburger_menu_fly_out_banner`;
-
-    // console.log(chalk.cyan(`  Scraping: ${nextPageLink}`));
-    // console.log(chalk.yellow(`  PageCounter: ${pageCounter}`));
-
-    if (pageCounter > pageLimit) {
-      exportResults(parsedResults);
-      return false;
-    }
-
-    CrawlPagiProduct(nextPageLink);
-
-    //   console.log($);
+    exportResults(fuldesStatus);
   } catch (error) {
-    // exportResults(parsedResults);
+    exportResults(parsedResults);
     console.error(error);
   }
 }
 
-CrawlPagiProduct(url);
+CrawlProDetail();

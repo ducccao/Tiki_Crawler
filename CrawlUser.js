@@ -10,7 +10,8 @@ const productController = require("./controllers/product.controller");
 const axios = require("axios");
 const chalk = require("chalk");
 
-const outputFile = "data.json";
+const outputFile = __dirname + `/result/users.json`;
+
 const parsedResults = [];
 const pageLimit = config.tiki.products.pagination.limit;
 let pageCounter = 1;
