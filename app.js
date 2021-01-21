@@ -8,50 +8,49 @@ const axios = require("axios");
 // Queue URLs with custom callbacks & parameters
 
 function crawl(url) {
-    const options = {
-        uri: url,
-        transform: function(body) {
-            //  console.log(body.body);
-            return cheerio.load(body);
-        },
-    };
+  const limit = config.tiki.products.pagination.limit;
 
-    (async function crawler() {
-        try {
-            // Lấy dữ liệu từ trang crawl đã được parseDOM
-            var $ = await requestPromise(options);
-        } catch (error) {
-            return error;
-        }
+  const options = {
+    uri: url,
+    transform: function (body) {
+      //  console.log(body.body);
+      return cheerio.load(body);
+    },
+  };
 
-        // Crawl Many product
-        const productStatus = await functions.CrawlProduct($);
-        console.log(productStatus);
+  (async function crawler() {
+    try {
+      // Lấy dữ liệu từ trang crawl đã được parseDOM
+      var $ = await requestPromise(options);
+    } catch (error) {
+      return error;
+    }
 
-        // Crawl Many product Details
-        //const prodtManyStatus = await functions.CrawManyProDetail();
-        //console.log(prodtManyStatus);
+    // Crawl Many product
+    const productStatus = await functions.CrawlProduct($);
+    console.log(productStatus);
 
-        // Crawl FullDes 1 product
-        //const fullDes1Status = await functions.CrawFullDes($);
+    // Crawl Many product Details
+    //const prodtManyStatus = await functions.CrawManyProDetail();
+    //console.log(prodtManyStatus);
 
-        // Crawl Many FulDes
-        // const fulDesManyStatus = await functions.CrawManyFullDes();
-    })();
+    // Crawl FullDes 1 product
+    //const fullDes1Status = await functions.CrawFullDes($);
+
+    // Crawl Many FulDes
+    // const fulDesManyStatus = await functions.CrawManyFullDes();
+  })();
 }
-
-
-
 
 //-------------------------
 //-- Common Input
 //-------------------------
 
 // test url
-const test1url = `http://listverse.com/`,
+const test1url = `http://listverse.com/`;
 
-    // URL - proDetails
-    const url = `https://tiki.vn/combo-2-lan-khu-mui-nuoc-hoa-enchanteur-charming-50ml-chai-p58673652.html`;
+// URL - proDetails
+const url = `https://tiki.vn/combo-2-lan-khu-mui-nuoc-hoa-enchanteur-charming-50ml-chai-p58673652.html`;
 // URL - Products
 const url2 = `https://tiki.vn/lam-dep-suc-khoe/c1520`;
 const proURL_2 = `https://tiki.vn/lam-dep-suc-khoe/c1520?page=2&src=c.1520.hamburger_menu_fly_out_banner`;
@@ -74,24 +73,26 @@ const PURE_URL_PAGI_5 = `https://tiki.vn/lam-dep-suc-khoe/c1520?page=5&src=c.152
 //-- Output: Records In Database
 //-------------------------
 
-crawl(PURE_URL);
+//crawl(PURE_URL);
+
+functions.CrawlPagiProduct(PURE_URL);
 
 //-------------------------
 //-- Watch Records Database
 //-------------------------
 async function HookProducts() {
-    const products = await query.getAllProducts();
-    console.log(products);
+  const products = await query.getAllProducts();
+  console.log(products);
 }
 
 async function HookUsers() {
-    const users = await query.getAllUsers();
-    console.log(users);
+  const users = await query.getAllUsers();
+  console.log(users);
 }
 
 async function HookProDetails() {
-    const proDetails = await query.getAllProDetails();
-    console.log(proDetails);
+  const proDetails = await query.getAllProDetails();
+  console.log(proDetails);
 }
 
 // HookProduct();
@@ -102,7 +103,7 @@ async function HookProDetails() {
 //-- Crawl Prodetail
 //-------------------------
 async function CrawlProDetailHander() {
-    const status = await functions.CrawManyProDetail();
+  const status = await functions.CrawManyProDetail();
 }
 //CrawlProDetailHander();
 
@@ -110,6 +111,6 @@ async function CrawlProDetailHander() {
 //-- Crawl Prodetail
 //-------------------------
 async function CrawlFullDesHanler() {
-    // const status = await functions.CrawFullDes($);
+  // const status = await functions.CrawFullDes($);
 }
 //CrawlFullDesHanler();

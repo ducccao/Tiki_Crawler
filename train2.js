@@ -4,8 +4,7 @@ const cheerio = require("cheerio");
 const fs = require("fs");
 const chalk = require("chalk");
 
-const url =
-  "https://tiki.vn/lam-dep-suc-khoe/c1520?src=c.1520.hamburger_menu_fly_out_banner";
+const url = "https://tiki.vn/the-thao-da-ngoai/c1975?page=2";
 const outputFile = "data.json";
 const parsedResults = [];
 const pageLimit = 10;

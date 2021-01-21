@@ -5,86 +5,89 @@ const productController = require("./../controllers/product.controller");
 const productModel = require("../models/product.model");
 const fulDessModel = require("./../models/fullDes.model");
 const fullDesModel = require("./../models/fullDes.model");
+const axios = require("axios");
+const chalk = require("chalk");
+const cheerio = require("cheerio");
 
 module.exports = {
-    // When You Start App
-    // Using All those functions bellow then Crawl All Recors
-    // for the first time
+  // When You Start App
+  // Using All those functions bellow then Crawl All Recors
+  // for the first time
 
-    // Crawl Product Detail
-    async CrawlProductDetail($) {
-        const CrawlProDetailDataEntity = functionsTechnical.CrawlProductDetailTechnical(
-            $
-        );
-        const insertProDetailStatus = await proDetailController.insertCrawlRecordsIntoDatabase(
-            CrawlProDetailDataEntity,
-            config.database.table.productdetails
-        );
+  // Crawl Product Detail
+  async CrawlProductDetail($) {
+    const CrawlProDetailDataEntity = functionsTechnical.CrawlProductDetailTechnical(
+      $
+    );
+    const insertProDetailStatus = await proDetailController.insertCrawlRecordsIntoDatabase(
+      CrawlProDetailDataEntity,
+      config.database.table.productdetails
+    );
 
-        //  console.log(insertProDetailStatus);
-        return insertProDetailStatus;
-    },
+    //  console.log(insertProDetailStatus);
+    return insertProDetailStatus;
+  },
 
-    // Crawl Product
-    async CrawlProduct($) {
-        const records = functionsTechnical.CrawlProductTech($);
-        const insertProductStatus = await productController.insertManyIntoDB(
-            records,
-            config.database.table.products
-        );
-        //     console.log(insertProductStatus);
-        return insertProductStatus;
-    },
+  // Crawl Product
+  async CrawlProduct($) {
+    const records = functionsTechnical.CrawlProductTech($);
+    const insertProductStatus = await productController.insertManyIntoDB(
+      records,
+      config.database.table.products
+    );
+    //     console.log(insertProductStatus);
+    return insertProductStatus;
+  },
 
-    // Crawl Many Product Detail
-    async CrawManyProDetail() {
-        const prodtURLArr = [];
-        const prodtURLData = await productModel.getAllProDetailURL();
+  // Crawl Many Product Detail
+  async CrawManyProDetail() {
+    const prodtURLArr = [];
+    const prodtURLData = await productModel.getAllProDetailURL();
 
-        for (let d = 0; d < prodtURLData.length; ++d) {
-            prodtURLArr.push(prodtURLData[d].proDetailURL);
-        }
+    for (let d = 0; d < prodtURLData.length; ++d) {
+      prodtURLArr.push(prodtURLData[d].proDetailURL);
+    }
 
-        //  console.log(prodtURLArr);
+    //  console.log(prodtURLArr);
 
-        let count = 0;
-        for (let i = 0; i < prodtURLArr.length; ++i) {
-            const prodtData = await functionsTechnical.CrawlManyProDetal(
-                config.tiki.pure_url + prodtURLArr[i]
-            );
-        }
+    let count = 0;
+    for (let i = 0; i < prodtURLArr.length; ++i) {
+      const prodtData = await functionsTechnical.CrawlManyProDetal(
+        config.tiki.pure_url + prodtURLArr[i]
+      );
+    }
 
-        //  return `Inserted Into ${config.database.table.productdetails} -  ${count} Records!`;
-        // console.log(prodtURLArr);
-    },
+    //  return `Inserted Into ${config.database.table.productdetails} -  ${count} Records!`;
+    // console.log(prodtURLArr);
+  },
 
-    // Crawl fullDes
-    async CrawFullDes($) {
-        const fullDesCrawled = await functionsTechnical.CrawlFullDes($);
+  // Crawl fullDes
+  async CrawFullDes($) {
+    const fullDesCrawled = await functionsTechnical.CrawlFullDes($);
 
-        const entity = {
-            fullDes: `${fullDesCrawled}`,
-        };
+    const entity = {
+      fullDes: `${fullDesCrawled}`,
+    };
 
-        const status = await fulDessModel.insert(
-            entity,
-            config.database.table.productdescription
-        );
-        console.log(status);
-    },
+    const status = await fulDessModel.insert(
+      entity,
+      config.database.table.productdescription
+    );
+    console.log(status);
+  },
 
-    async CrawManyFullDes() {
-        const arrFuldesURLData = await fullDesModel.getManyURLFulDes();
-        const arrFuldesURL = [];
-        for (let i = 0; i < arrFuldesURLData.length; ++i) {
-            arrFuldesURL.push(arrFuldesURLData[i].proDetailURL);
-        }
-        //console.log(arrFuldesURL);
+  async CrawManyFullDes() {
+    const arrFuldesURLData = await fullDesModel.getManyURLFulDes();
+    const arrFuldesURL = [];
+    for (let i = 0; i < arrFuldesURLData.length; ++i) {
+      arrFuldesURL.push(arrFuldesURLData[i].proDetailURL);
+    }
+    //console.log(arrFuldesURL);
 
-        for (let i = 0; i < arrFuldesURL.length; ++i) {
-            const status = await functionsTechnical.CrawlManyFulDes(
-                config.tiki.pure_url + arrFuldesURL[i]
-            );
-        }
-    },
+    for (let i = 0; i < arrFuldesURL.length; ++i) {
+      const status = await functionsTechnical.CrawlManyFulDes(
+        config.tiki.pure_url + arrFuldesURL[i]
+      );
+    }
+  },
 };

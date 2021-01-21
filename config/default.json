@@ -27,7 +27,11 @@
         "products": {
             "proName": ".name span",
             "price": ".price-discount__price",
-            "proDetailURL": ".product-item"
+            "proDetailURL": ".product-item",
+            "pagination":{
+                "limit":5,
+                "wrapClass":".Pagination__Root-cyke21-0"
+            }
 
         },
         "proDesciption": {
