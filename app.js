@@ -3,6 +3,7 @@ const config = require("./config/default.json");
 const query = require("./database/query");
 const requestPromise = require("request-promise");
 const functions = require("./functionsCrawl/functions");
+const axios = require("axios");
 
 // Queue URLs with custom callbacks & parameters
 
@@ -24,11 +25,11 @@ function crawl(url) {
         }
 
         // Crawl Many product
-        //const productStatus = await functions.CrawlProduct($);
-        // console.log(productStatus);
+        const productStatus = await functions.CrawlProduct($);
+        console.log(productStatus);
 
         // Crawl Many product Details
-        // const prodtManyStatus = await functions.CrawManyProDetail();
+        //const prodtManyStatus = await functions.CrawManyProDetail();
         //console.log(prodtManyStatus);
 
         // Crawl FullDes 1 product
@@ -39,12 +40,18 @@ function crawl(url) {
     })();
 }
 
+
+
+
 //-------------------------
 //-- Common Input
 //-------------------------
 
-// URL - proDetails
-const url = `https://tiki.vn/combo-2-lan-khu-mui-nuoc-hoa-enchanteur-charming-50ml-chai-p58673652.html`;
+// test url
+const test1url = `http://listverse.com/`,
+
+    // URL - proDetails
+    const url = `https://tiki.vn/combo-2-lan-khu-mui-nuoc-hoa-enchanteur-charming-50ml-chai-p58673652.html`;
 // URL - Products
 const url2 = `https://tiki.vn/lam-dep-suc-khoe/c1520`;
 const proURL_2 = `https://tiki.vn/lam-dep-suc-khoe/c1520?page=2&src=c.1520.hamburger_menu_fly_out_banner`;
@@ -58,12 +65,15 @@ const url3 = `https://freetuts.net/reactjs/tu-hoc-reactjs`;
 
 // URL  - PURE
 const PURE_URL = `https://tiki.vn/lam-dep-suc-khoe/c1520?src=c.1520.hamburger_menu_fly_out_banner`;
+const PURE_URL_PAGI_2 = `https://tiki.vn/trang-diem/c1584?page=5&src=static_block`;
+const PURE_URL_PAGI_5 = `https://tiki.vn/lam-dep-suc-khoe/c1520?page=5&src=c.1520.hamburger_menu_fly_out_banner`;
 
 //-------------------------
 //-- Functions Crawl
 //-- Input: URL
 //-- Output: Records In Database
 //-------------------------
+
 crawl(PURE_URL);
 
 //-------------------------
