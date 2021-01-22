@@ -5,6 +5,7 @@ const proDetailModel = require("./../models/proDetail.model");
 const productModel = require("../models/product.model");
 const fullDesModel = require("../models/fullDes.model");
 const chalk = require("chalk");
+const userController = require("./../controllers/user.controller");
 
 module.exports = {
   // Crawl Product Detail Technical
@@ -232,20 +233,41 @@ module.exports = {
       }
 
       const userTrigger = config.tiki.user.trigger;
-      const core = $(`${userTrigger}`);
+      const core_username = $(`${userTrigger}`);
+      const core_user_comment = $(`.review-comment__content`);
+      const core_rating = $(`.review-comment__title`);
+      let rating = 0;
 
-      console.log(core);
+      if (core_rating.text() === "Rất không hài lòng") {
+        rating = 1;
+      } else if (core_rating.text() === "Không hài lòng") {
+        rating = 2;
+      } else if (core_rating.text() === "OK") {
+        rating = 3;
+      } else if (core_rating.text() === "Hài lòng") {
+        rating = 4;
+      } else {
+        rating = 5;
+      }
 
-      // const entity = {
-      //   fullDes: core,
-      // };
+      let comment = core_user_comment.text();
 
-      // const status = await fullDesModel.insert(
-      //   entity,
-      //   config.database.table.productdescription
-      // );
+      if (typeof core_user_comment.text() !== "string") {
+        comment = "";
+      }
+
+      const entity = {
+        userName: core_username.text(),
+        comment: comment,
+        rating: rating,
+      };
+
+      const status = await userController.insert(
+        entity,
+        config.database.table.users
+      );
     })();
 
-    return "Inserted 1 FulDes";
+    return "Inserted an user record!";
   },
 };

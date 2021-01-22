@@ -27,9 +27,30 @@ async function CrawlManyUsers(url) {
     }
 
     const userTrigger = config.tiki.user.trigger;
-    const core = $(`.review-comment__avatar-name`).text();
+    const core_username = $(`${userTrigger}`);
+    const core_user_comment = $(`.review-comment__content`);
+    const core_rating = $(`.review-comment__title`);
+    let rating = 0;
 
-    console.log(core);
+    if (core_rating.text() === "Rất không hài lòng") {
+      rating = 1;
+    } else if (core_rating.text() === "Không hài lòng") {
+      rating = 2;
+    } else if (core_rating.text() === "OK") {
+      rating = 3;
+    } else if (core_rating.text() === "Hài lòng") {
+      rating = 4;
+    } else {
+      rating = 5;
+    }
+
+    const entity = {
+      userName: core_username.text(),
+      comment: core_user_comment.text(),
+      rating: rating,
+    };
+
+    console.log(entity);
 
     // const entity = {
     //   fullDes: core,

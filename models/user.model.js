@@ -6,4 +6,7 @@ module.exports = {
     const sql = `select proDetailURL from ${config.database.table.products}`;
     return db.load(sql);
   },
+  insert(entity, tblName) {
+    return db.insert(entity, tblName);
+  },
 };

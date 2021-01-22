@@ -120,21 +120,33 @@ module.exports = {
     const from = `6495600`;
     const to = `6495999`;
 
+    const from2 = `6950500`;
+    const to2 = `6950800`;
+
     const pure_url = `https://tiki.vn/bon-ngam-chan-massage-cao-cap-usa-6-con-lan-tu-dong-voi-phun-massage-serenelife-sliftsp12-nhap-khau-p69064268/nhan-xet/${from}`;
     for (let i = from; i < to; ++i) {
       const temp = `https://tiki.vn/bon-ngam-chan-massage-cao-cap-usa-6-con-lan-tu-dong-voi-phun-massage-serenelife-sliftsp12-nhap-khau-p69064268/nhan-xet/${i}`;
       userURLArr.push(temp);
     }
     //console.log(arrFuldesURL);
-
-    const ret = [];
-    for (let i = 0; i < userURLArr.length; ++i) {
-      const status = await functionsTechnical.CrawlManyUsers(
-        config.tiki.pure_url + userURLArr[i]
-      );
-      ret.push(status);
+    const userURLArry2 = [];
+    for (let i = from2; i < to2; ++i) {
+      const temp2 = `https://tiki.vn/giay-the-thao-nam-biti-s-hunter-street-x-vietmax-2020-bst-hanoi-culture-patchwork-dsmh025-p69068491/nhan-xet/${i}`;
+      userURLArry2.push(temp2);
     }
 
-    return ret;
+    // const ret = [];
+    // for (let i = 0; i < userURLArr.length; ++i) {
+    //   const status = await functionsTechnical.CrawlManyUsers(userURLArr[i]);
+    //   ret.push(status);
+    // }
+
+    const ret2 = [];
+    for (let i = 0; i < userURLArry2.length; ++i) {
+      const status = await functionsTechnical.CrawlManyUsers(userURLArry2[i]);
+      ret2.push(status);
+    }
+
+    return ret2;
   },
 };
