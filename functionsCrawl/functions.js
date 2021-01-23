@@ -116,37 +116,42 @@ module.exports = {
   // Crawl Many Users
   async CrawManyUsers() {
     const userURLArrData = await userModel.getManyUserURL();
-    const userURLArr = [];
-    const from = `6495600`;
-    const to = `6495999`;
 
-    const from2 = `6950500`;
-    const to2 = `6950800`;
-
-    const pure_url = `https://tiki.vn/bon-ngam-chan-massage-cao-cap-usa-6-con-lan-tu-dong-voi-phun-massage-serenelife-sliftsp12-nhap-khau-p69064268/nhan-xet/${from}`;
-    for (let i = from; i < to; ++i) {
-      const temp = `https://tiki.vn/bon-ngam-chan-massage-cao-cap-usa-6-con-lan-tu-dong-voi-phun-massage-serenelife-sliftsp12-nhap-khau-p69064268/nhan-xet/${i}`;
-      userURLArr.push(temp);
-    }
-    //console.log(arrFuldesURL);
-    const userURLArry2 = [];
-    for (let i = from2; i < to2; ++i) {
-      const temp2 = `https://tiki.vn/giay-the-thao-nam-biti-s-hunter-street-x-vietmax-2020-bst-hanoi-culture-patchwork-dsmh025-p69068491/nhan-xet/${i}`;
-      userURLArry2.push(temp2);
+    function userURLFromTo(url, from, to) {
+      const userArrURL = [];
+      for (let i = from; i <= to; ++i) {
+        const temp = url + `/${i}`;
+        userArrURL.push(temp);
+      }
+      return userArrURL;
     }
 
-    // const ret = [];
-    // for (let i = 0; i < userURLArr.length; ++i) {
-    //   const status = await functionsTechnical.CrawlManyUsers(userURLArr[i]);
-    //   ret.push(status);
-    // }
+    const durex_url = `https://tiki.vn/bao-cao-su-invisible-durex-3s-3-bao-hop-100930570-p796867/nhan-xet`;
+    const durex_from = `6816200`;
+    const durex_to = `6816900`;
+    const durex_user_arr = userURLFromTo(durex_url, durex_from, durex_to);
 
-    const ret2 = [];
-    for (let i = 0; i < userURLArry2.length; ++i) {
-      const status = await functionsTechnical.CrawlManyUsers(userURLArry2[i]);
-      ret2.push(status);
+    const durex_ret = [];
+    for (let i = 0; i < durex_user_arr.length; ++i) {
+      const durex_status = await functionsTechnical.CrawlManyUsers(
+        durex_user_arr[i]
+      );
+      durex_ret.push(durex_status);
     }
 
-    return ret2;
+    const skin_url = `https://tiki.vn/sua-rua-mat-cetaphil-gentle-skin-cleaner-500ml-8394107341305-9318637069637-p1362447/nhan-xet`;
+    const skin_from = `4079500`;
+    const skin_to = `4079999`;
+    const skin_user_arr = userURLFromTo(skin_url, skin_from, skin_to);
+
+    const skin_ret = [];
+    for (let i = 0; i < skin_user_arr.length; ++i) {
+      const skin_status = await functionsTechnical.CrawlManyUsers(
+        skin_user_arr[i]
+      );
+      durex_ret.push(skin_status);
+    }
+
+    return [durex_ret, skin_ret];
   },
 };
