@@ -32,7 +32,7 @@ const exportResults = (parsedResults) => {
 };
 
 // Crawl Pagi Product
-async function CrawlProDetail() {
+async function CrawlFulDes() {
   try {
     const fuldesStatus = await functions.CrawManyFullDes();
 
@@ -45,4 +45,4 @@ async function CrawlProDetail() {
   }
 }
 
-CrawlProDetail();
+CrawlFulDes();
