@@ -27,6 +27,8 @@ DROP TABLE IF EXISTS `Users`;
 CREATE TABLE `Users`(
 `userID` int unsigned NOT NULL AUTO_INCREMENT,
 `userName` nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
+`comment` nvarchar(5000) ,
+`rating` int,
 PRIMARY KEY (`userID`)
 ) ENGINE=MyISAM auto_increment=1 default  charset=utf8 COLLATE=utf8_unicode_ci;
 -- --------------------------
@@ -39,53 +41,6 @@ PRIMARY KEY (`userID`)
 -- INSERT INTO `Users` VALUES(2,"nghihua",2);
 -- INSERT INTO `Users` VALUES(3,"khanhbui",3);
 -- INSERT INTO `Users` VALUES(4,"ngankim",4);
--- COMMIT;
-
-
--- --------------------------
--- Table structure for Comments
--- --------------------------
-DROP TABLE IF EXISTS `Comments`;
-CREATE TABLE `Comments`(
-`userID` int unsigned NOT NULL AUTO_INCREMENT,
-`comment` nvarchar(5000) COLLATE utf8_unicode_ci NOT NULL,
-PRIMARY KEY (`userID`),
-FOREIGN KEY (`userID`) REFERENCES  `Users` (`userID`)
-) ENGINE=MyISAM auto_increment=1 default  charset=utf8 COLLATE=utf8_unicode_ci;
--- --------------------------
--- Records of Comments
--- --------------------------
-
-
--- BEGIN;
--- INSERT INTO `Comments` VALUES(1,"duccao",1);
--- INSERT INTO `Comments` VALUES(2,"nghihua",2);
--- INSERT INTO `Comments` VALUES(3,"khanhbui",3);
--- INSERT INTO `Comments` VALUES(4,"ngankim",4);
--- COMMIT;
-
-
-
--- --------------------------
--- Table structure for Rating
--- --------------------------
-DROP TABLE IF EXISTS `Rating`;
-CREATE TABLE `Rating`(
-`userID` int unsigned NOT NULL AUTO_INCREMENT,
-`rate` int,
-PRIMARY KEY (`userID`),
-FOREIGN KEY (`userID`) REFERENCES  `Users` (`userID`)
-) ENGINE=MyISAM auto_increment=1 default  charset=utf8 COLLATE=utf8_unicode_ci;
--- --------------------------
--- Records of Comments
--- --------------------------
-
-
--- BEGIN;
--- INSERT INTO `Rating` VALUES(1,"duccao",1);
--- INSERT INTO `Rating` VALUES(2,"nghihua",2);
--- INSERT INTO `Rating` VALUES(3,"khanhbui",3);
--- INSERT INTO `Rating` VALUES(4,"ngankim",4);
 -- COMMIT;
 
 
