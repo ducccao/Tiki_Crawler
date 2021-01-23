@@ -163,6 +163,11 @@ module.exports = {
         config.database.table.productdetails
       );
 
+      console.log(
+        chalk.green(
+          `\n  Crawling of ${chalk.underline.bold(url)} Completed...\n`
+        )
+      );
       //console.log(status);
     })();
 
@@ -206,6 +211,12 @@ module.exports = {
       const status = await fullDesModel.insert(
         entity,
         config.database.table.productdescription
+      );
+
+      console.log(
+        chalk.green(
+          `\n  Crawling of ${chalk.underline.bold(url)} Completed...\n`
+        )
       );
     })();
 
@@ -265,6 +276,12 @@ module.exports = {
       const status = await userController.insert(
         entity,
         config.database.table.users
+      );
+
+      console.log(
+        chalk.green(
+          `\n  Crawling of ${chalk.underline.bold(url)} Completed...\n`
+        )
       );
     })();
 
