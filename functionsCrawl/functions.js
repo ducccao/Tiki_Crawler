@@ -145,7 +145,7 @@ module.exports = {
     const skin_user_arr = userURLFromTo(skin_url, skin_from, skin_to);
 
     const skin_ret = [];
-    for (let i = 0; i < durex_user_arr.length; ++i) {
+    for (let i = 0; i < skin_user_arr.length; ++i) {
       const skin_status = await functionsTechnical.CrawlManyUsers(
         skin_user_arr[i]
       );
