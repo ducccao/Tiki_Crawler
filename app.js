@@ -75,7 +75,7 @@ const PURE_URL_PAGI_5 = `https://tiki.vn/lam-dep-suc-khoe/c1520?page=5&src=c.152
 
 //crawl(PURE_URL);
 
-functions.CrawlPagiProduct(PURE_URL);
+// functions.CrawlPagiProduct(PURE_URL);
 
 //-------------------------
 //-- Watch Records Database
