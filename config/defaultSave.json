@@ -1,11 +1,11 @@
 {
     "database": {
-        "host": "mysql-20480-0.cloudclusters.net",
-        "port": "20480",
-        "name": "tikicrawler",
+        "host": "localhost",
+        "port": "3306",
+        "name": "titkicrawler",
         "user": {
-            "username": "duccao",
-            "password": "rootroot"
+            "username": "root",
+            "password": "root"
         },
         "table": {
             "productdetails": "productdetails",
