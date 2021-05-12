@@ -15,8 +15,8 @@ Thực hiện cào dữ liệu chuẩn bị cho giai đoạn tư vấn
 **+ Video hướng dẫn sử dụng đồ án:**
 https://www.youtube.com/watch?v=Avkgti3dGI0&list=PL0-FzENhrcBS6C8XQXB-zixBw93UY7J21&index=1
 
-**+ Báo cáo đồ án**
+**+ Báo cáo đồ án:**
 https://drive.google.com/file/d/117BC3d0xfExnE6m_hmOSFSpe4l76vXSA/view?usp=sharing
 
-**+ Bảng phân công**
+**+ Bảng phân công:**
 https://docs.google.com/spreadsheets/d/1KRqeXfi_q_yRfGKbLxGIJKfDC9y1oTbb5IGb-UBJxqQ/edit#gid=0
